@@ -81,10 +81,22 @@ export default function markdownItCheckbox(md: MarkdownIt): void {
             tokens[k].type = "checkbox_list_open";
             break;
           }
+          if (
+            tokens[k].level === listLevel &&
+            tokens[k].type === "checkbox_list_open"
+          ) {
+            break;
+          }
         }
         for (let k = i + 1; k < tokens.length; k++) {
           if (tokens[k].level === listLevel && isListClose(tokens[k])) {
             tokens[k].type = "checkbox_list_close";
+            break;
+          }
+          if (
+            tokens[k].level === listLevel &&
+            tokens[k].type === "checkbox_list_close"
+          ) {
             break;
           }
         }
